@@ -209,16 +209,19 @@ sub runbuild {
     my $configSwitch = $^O eq "MSWin32" ? "${switch}p:Configuration=Debug " : "${switch}p:Configuration=Debug-MONO ";
     
     # Generate and print the command we run
-    my $command = "$program ${switch}nologo ${switch}v:q " .
-                  "$rebuildSwitch $configSwitch $toolSet $packageProperty" .
-                  "${switch}p:BinDir=$binDir ${switch}p:PackagesDir=$packagesDir " .
-                  "${switch}fl \"${switch}flp:LogFile=$logFile;V=diag\" ${switch}p:BuildSamples=false " .
-                  " $solutionToBuild";
-    print $command . "\n" unless $silent;
+    my @command = ($program, $switch.'nologo', $switch.'v:q',
+                  $rebuildSwitch, $configSwitch, $toolSet, $packageProperty,
+                  "${switch}p:BinDir=$binDir", "${switch}p:PackagesDir=$packagesDir",
+                  $switch.'fl', "${switch}flp:LogFile=$logFile;V=diag", "${switch}p:BuildSamples=false",
+                  $solutionToBuild;
+    print @command . "\n" unless $silent;
 
     # Run build, parsing it's output to count errors and warnings
     # Harakiri if can't run
-    open(BUILD_OUTPUT, "$command 2>&1 |") or die "Cannot run $program, error $!";
+    use Symbol 'gensym';
+    use IPC::Open3 'open3';
+    my $build_output = gensym;
+    open3(undef, $build_output, $build_output, @command) or die "Cannot run $program, error $!";
     my $warningCount = 0;
     my $errorCount = 0;
     for (<BUILD_OUTPUT>) {
