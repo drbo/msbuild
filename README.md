@@ -3,13 +3,7 @@ The Microsoft Build Engine is a platform for building applications. This engine,
 
 For more information on MSBuild, see the [MSDN documentation](https://msdn.microsoft.com/en-us/library/dd393574(v=vs.120).aspx).
 
-Windows: [![Build Status](http://dotnet-ci.cloudapp.net/job/Microsoft_msbuild/job/innerloop_xplat_Windows_NT/badge/icon)](http://dotnet-ci.cloudapp.net/job/Microsoft_msbuild/job/innerloop_xplat_Windows_NT/)
-
-Ubuntu: [![Build Status](http://dotnet-ci.cloudapp.net/job/Microsoft_msbuild/job/innerloop_xplat_Ubuntu/badge/icon)](http://dotnet-ci.cloudapp.net/job/Microsoft_msbuild/job/innerloop_xplat_Ubuntu/)
-
-OSX: [![Build Status](http://dotnet-ci.cloudapp.net/job/Microsoft_msbuild/job/innerloop_xplat_OSX/badge/icon)](http://dotnet-ci.cloudapp.net/job/Microsoft_msbuild/job/innerloop_xplat_OSX/)
-
-Ubuntu and OSX CIs are failing due to issue [#390](https://github.com/Microsoft/msbuild/issues/390)
+[![Build Status](http://dotnet-ci.cloudapp.net/job/Microsoft_msbuild/job/innerloop_master_Windows_NT/badge/icon)](http://dotnet-ci.cloudapp.net/job/Microsoft_msbuild/job/innerloop_master_Windows_NT/)
 
 ### Source code
 
@@ -20,14 +14,13 @@ For the full supported experience, you will need to have Visual Studio 2015. You
 
 To get started on **Visual Studio 2015**:
 
-1. [Install Visual Studio 2015](http://www.visualstudio.com/en-us/downloads/visual-studio-2015-downloads-vs).  Select the following optional components:
-  - _Microsoft Web Developer Tools_
-  - _Universal Windows App Development Tools_
-    - _Tools and Windows SDK 10.0.10240_
+1. Set up a box with Visual Studio 2015. Either 
+[install  Visual Studio 2015](http://www.visualstudio.com/en-us/downloads/visual-studio-2015-downloads-vs), 
+or grab a [prebuilt Azure VM image](http://blogs.msdn.com/b/visualstudioalm/archive/2014/06/04/visual-studio-14-ctp-now-available-in-the-virtual-machine-azure-gallery.aspx).
 2. Clone the source code (see above).
 3. Restore NuGet packages: `msbuild /t:BulkRestoreNugetPackages build.proj`
 4. Open src/MSBuild.sln solution in Visual Studio 2015.
-
+ 
 ## How to Engage, Contribute and Provide Feedback
 Before you contribute, please read through the contributing and developer guides to get an idea of what kinds of pull requests we will or won't accept.
 
